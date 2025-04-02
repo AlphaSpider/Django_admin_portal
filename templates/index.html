@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #f4f4f4;
+        }
+        tr:hover {
+            background: #f1f1f1;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            color: #fff;
+            background: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <a href="insert_pr">Add Product</a>
+    <h1>Products Lists</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Main Category</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for x in data %}
+                    <tr>
+                    <th>{{x.id}}</th>
+                    <th>{{x.name}}</th>
+                    <th>
+                        {% if x.product_image %}
+                            <img src="{{ x.product_image.url }}" width="200px" height="200px" alt="">
+                        {% else %}
+                            <img src="/static/default-image.jpg" width="200px" height="200px" alt="No Image">
+                        {% endif %}
+                    </th>
+                    <th>{{x.price}}</th>
+                    <th>{{x.stock}}</th>
+                    <th>{{x.category.category_id}}</th>
+                        <th>{{x.category.main_category.main_name}}</th>
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+        <!-- <tbody>
+            {% for x in data %}
+            <th>
+                <tr>{{x.id}}</tr>
+                <tr>{{x.name}}</tr>
+                <tr>{{x.stock}}</tr>
+                <tr>{{x.price}}</tr>
+                <tr>{{x.category}}</tr>
+                <tr>{{x.main_name}}</tr>
+            </th>
+            {% endfor %}
+        </tbody> -->
+    </table>
+</body>
+</html>

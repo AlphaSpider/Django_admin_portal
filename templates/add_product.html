@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Product</h1>
+      
+    <form method="POST">
+        {% csrf_token %}  
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="price">Price</label>
+        <input type="text" name="price" id="price" required>
+
+        <label for="stock">Stock</label>
+        <input type="number" name="stock" id="stock">
+
+        <label for="category">Category</label>
+        <select name="category" id="category" required>
+            <option value="">Select a category</option>
+            {% for x in data %}
+            <option value="{{x.cat_id}}">{{x.name}}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="product_image">Product Image:</label>
+        <input type="file" id="product_image" name="product_image" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
